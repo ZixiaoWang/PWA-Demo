@@ -1,4 +1,4 @@
-const CACHE_VERSION = '1.0.0';
+const CACHE_VERSION = '1.0.1';
 const CACHE_NAME = 'PWA_SITE::' + CACHE_VERSION;
 const fileToBeCached = [
     '/',
@@ -10,7 +10,7 @@ self
     .addEventListener(
         'install',
         (event) => {
-            console.log('Service Worker has been installed');
+            console.log('Service Worker has been installed', self.registration);
             event.waitUntil(
                 caches
                     .open(CACHE_NAME)
@@ -27,26 +27,54 @@ self
         async (event) => {
             console.log('Service Worker has been activated');
 
-            let keyList = await caches.keys();
-            let updateCache = keyList.reduce(async (accumulator, key, index) => {
-                await accumulator;
-                if(key !== CACHE_NAME) {
-                    return caches.delete(key);
-                } else {
-                    return Promise.resolve();
-                }
-            }, Promise.resolve());
-
-            event.waitUntil(updateCache);
+            event.waitUntil(
+                caches.keys()
+                    .then(keys => {
+                        return Promise.all(
+                            keys.map(key => {
+                                if(key !== CACHE_NAME) {
+                                    return caches.delete(key);
+                                }
+                            })
+                        ).catch((err) => {
+                            console.warn(err);
+                            return Promise.resolve();
+                        })
+                    })
+            );
         }
     );
 
 self
     .addEventListener(
         'fetch',
+        (event) => {
+            event.respondWith(
+                caches.match(event.request)
+                    .then(response => {
+                        if(navigator.online || !response) { return fetch(event.request); }
+                        else {
+                            return response;
+                        }
+                    })
+            );
+        }
+    );
+
+self
+    .addEventListener(
+        'push',
         async (event) => {
-            let cache = await caches.open(CACHE_NAME);
-            let response = cache.match(event.request) || fetch(event.request);
-            event.respondWith(response);
+            console.log('Service Worker has recieved PushEvent', pushEvent);
+            event.waitUntil(
+                self.registration
+                    .showNotification(
+                        'One small step for man, one gaint leap for mankind',
+                        {
+                            body: "This is a historical moment",
+                            icon: "https://placekitten.com/35/35"
+                        }
+                    )
+            )
         }
     )
