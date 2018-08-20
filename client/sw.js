@@ -34,6 +34,8 @@ self
                             keys.map(key => {
                                 if(key !== CACHE_NAME) {
                                     return caches.delete(key);
+                                } else {
+                                    return Promise.resolve();
                                 }
                             })
                         ).catch((err) => {
@@ -64,8 +66,8 @@ self
 self
     .addEventListener(
         'push',
-        async (event) => {
-            console.log('Service Worker has recieved PushEvent', pushEvent);
+        (event) => {
+            console.log('Service Worker has recieved PushEvent', event);
             event.waitUntil(
                 self.registration
                     .showNotification(
