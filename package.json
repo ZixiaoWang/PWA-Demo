@@ -1,0 +1,28 @@
+{
+  "name": "pwa-demo",
+  "version": "1.0.0",
+  "description": "The demo project for PWA tech",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZixiaoWang/PWA-Demo.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "TypeScript",
+    "PWA"
+  ],
+  "author": "www.wangzixiao@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZixiaoWang/PWA-Demo/issues"
+  },
+  "homepage": "https://github.com/ZixiaoWang/PWA-Demo#readme",
+  "devDependencies": {
+    "@types/fs-extra": "^5.0.4",
+    "fs-extra": "^7.0.0"
+  }
+}
