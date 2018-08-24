@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
@@ -41,8 +43,8 @@ const MANIFEST_SAMPLE = {
 }
 
 export async function generateManifest() {
-    await fs.ensureDir(path.resolve(__dirname, 'icons'));
-    await fs.writeJSON(path.resolve(__dirname, 'manifest.json'), MANIFEST_SAMPLE, { spaces: 2});
+    await fs.ensureDir(path.resolve('icons'));
+    await fs.writeJSON(path.resolve('manifest.json'), MANIFEST_SAMPLE, { spaces: 2});
 }
 
 generateManifest()

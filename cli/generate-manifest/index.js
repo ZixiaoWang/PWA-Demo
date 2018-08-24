@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -86,10 +87,10 @@ function generateManifest() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, fs.ensureDir(path.resolve(__dirname, 'icons'))];
+                case 0: return [4 /*yield*/, fs.ensureDir(path.resolve('icons'))];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, fs.writeJSON(path.resolve(__dirname, 'manifest.json'), MANIFEST_SAMPLE, { spaces: 2 })];
+                    return [4 /*yield*/, fs.writeJSON(path.resolve('manifest.json'), MANIFEST_SAMPLE, { spaces: 2 })];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];

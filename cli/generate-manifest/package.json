@@ -1,0 +1,12 @@
+{
+  "name": "@pwa-demo/generate-manifest",
+  "version": "1.0.0",
+  "description": "Generate Manifest",
+  "main": "index.js",
+  "bin": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "www.wangzixiao@gmail.com",
+  "license": "MIT"
+}
